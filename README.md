@@ -3,7 +3,7 @@ More than 2.2 million words! Place it in Assets/SharedAssets. Inform me, if any 
 **Links are constantly updated.**  
 # PvP-Scrabble-like-game[Android version]
 ###1. What:   
-Open-source version of games like scrabble with LAN and hot-seat multiplayer. Written fully in C#.   
+Open-source version of games like scrabble with LAN and hot-seat multiplayer. Written fully in C#. Note: android version was moved to separate repo!   
 ###2. Why:   
 There are a few multilayer open-source conversions of scrabble-like games. Even fewer with network mode and none in my native language.   
 ###3. How:   

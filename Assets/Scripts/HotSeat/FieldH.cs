@@ -1,4 +1,6 @@
-﻿using Mono.Data.Sqlite;
+﻿#define Release
+
+using Mono.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -53,7 +55,7 @@ public class FieldH : MonoBehaviour
     {
         CurrentTiles = new List<TileH>();
 #if Release
-        var connection = @"URI=file:" + Application.streamingAssetsPath + @"/words.db";
+        var connection = @"URI=file:" + Application.persistentDataPath + @"/words.db";
         _dbConnection = new SqliteConnection(connection);
         _dbConnection.Open();
 #endif
@@ -577,12 +579,11 @@ public class FieldH : MonoBehaviour
     private bool CheckWord(string word)
     {
 #if Release
-        var sql = "SELECT count(*) FROM AllWords WHERE Word like \"" + word.ToLower() + "\"";
+        var sql = "SELECT EXISTS(SELECT 1 FROM AllWords WHERE Word like \"" + word.ToLower() + "\" LIMIT 1)";
         var command = new SqliteCommand(sql, _dbConnection);
         var inp = command.ExecuteScalar();
         return Convert.ToInt32(inp) != 0;
 #endif
-        return true;
     }
 
     #endregion Word cheking

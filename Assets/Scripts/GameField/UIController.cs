@@ -1,19 +1,20 @@
-﻿using System;
+﻿#define MP
+using System;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
+//Todo: sync nicknames
 public class UIController : MonoBehaviour
 {
     //Score of player
     public Text Player1Text;
-
     public Text Player2Text;
     public Material PlayerGlowMaterial;
     public Material PlayerIdleMaterial;
 
     //Error messages
     public Text NotExistText;
-
     public Text DeleteText;
     public Text ChangeLetterText;
     public Text WrongTileText;
@@ -45,8 +46,8 @@ public class UIController : MonoBehaviour
         _currentObject = StartText.gameObject;
         _player1Name = PlayerPrefs.GetString("Player1", "Гравець 1");
         _player2Name = PlayerPrefs.GetString("Player2", "Гравець 2");
-        Player1Text.text = String.Format("{0}\nБали: 0", _player1Name);
-        Player2Text.text = String.Format("{0}\nБали: 0", _player2Name);
+        Player1Text.text = String.Format("{0}\tБали: 0", _player1Name);
+        Player2Text.text = String.Format("{0}\tБали: 0", _player2Name);
     }
 
     //Makes current player glow, updates points
@@ -121,7 +122,7 @@ public class UIController : MonoBehaviour
 #if MP
 
     #region Multiplayer only
-
+    
     #region Button activation
 
     public void SetChangeButtonActive(bool active)
@@ -184,6 +185,12 @@ public class UIController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void ChangePlayerName(int playerNumber, string name)
+    {
+        if (playerNumber == 1)
+            Player1Text.text = name;
+        else Player2Text.text = name;
+    }
     #endregion Multiplayer only
 
 #endif

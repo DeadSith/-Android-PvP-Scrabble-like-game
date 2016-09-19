@@ -51,11 +51,12 @@ public class StartController : MonoBehaviour
         if (NetworkClient.active && !ClientScene.ready)
         {
             SettingsCanvas.SetActive(false);
-            ClientScene.Ready(Manager.client.connection);
+            
             if (ClientScene.localPlayers.Count == 0)
             {
                 ClientScene.AddPlayer(0);
             }
+            ClientScene.Ready(Manager.client.connection);
         }
         else
         {

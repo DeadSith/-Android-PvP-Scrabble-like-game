@@ -1,4 +1,6 @@
-﻿using Mono.Data.Sqlite;
+﻿#define Test
+
+using Mono.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -539,22 +541,16 @@ public class FieldLAN : MonoBehaviour
 
     private bool CheckWord(string word)
     {
+#if Test
+        return true;
+#endif
         var sql = "SELECT EXISTS(SELECT 1 FROM AllWords WHERE Word like \"" + word.ToLower() + "\" LIMIT 1)";
         var command = new SqliteCommand(sql, _dbConnection);
         var inp = command.ExecuteScalar();
         return Convert.ToInt32(inp) != 0;
-        /*if (Convert.ToInt32(inp) != 0)
-            return true;
-        else
-        {
-            sql = "SELECT count(*) FROM AllWords WHERE Word like \"" + word.ToLower() + "\"";
-            command = new SqliteCommand(sql, _dbConnection);
-            inp = command.ExecuteScalar();
-            return Convert.ToInt32(inp) != 0;
-        }*/
     }
 
-    #endregion Words Checking
+#endregion Words Checking
 
     public void EndGame(int winner, int player1Score, int player2Score)//Player, who ran out of letters is passed
     {

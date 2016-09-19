@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-//Todo: sync number of skipped turns
+
+//Todo: finish assigning buttons
 public class LetterBoxLAN : NetworkBehaviour
 {
     #region Letters
@@ -27,7 +28,6 @@ public class LetterBoxLAN : NetworkBehaviour
     public UIGrid LetterGrid;
 
     private const byte NumberOfLetters = 7;
-    private float _distanceBetweenLetters = 1.2f;
     private bool _isFirstTurn = true;
     private FieldLAN _currentField;
     private GameObject _waitTextGameObject;
@@ -120,9 +120,8 @@ public class LetterBoxLAN : NetworkBehaviour
         LetterPrefab = prefab.GetComponent<LetterLAN>();
         CurrentLetters = new List<LetterLAN>();
         transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
-
+        LetterGrid = gameObject.transform.parent.GetComponent<UIGrid>();
         _currentField = GameObject.FindGameObjectWithTag("Field").GetComponent<FieldLAN>();
-        _distanceBetweenLetters = LetterGrid.Items[0, 0].gameObject.GetComponent<RectTransform>().rect.width;
         _allLetters = new List<string>
     {
         "а","а","с","и","р","о","р","д","ш","и","и","и","ц","е","н","а","т","щ","л","к","ж",
@@ -137,8 +136,8 @@ public class LetterBoxLAN : NetworkBehaviour
             _currentField.PlayerToSendCommands = this;
         if (isServer)
         {
-            _waitTextGameObject = GameObject.FindWithTag("Wait");
             _currentField.PlayerNumber = 1;
+            _waitTextGameObject = GameObject.FindGameObjectWithTag("WaitText");
             _waitTextGameObject.GetComponent<Text>().enabled = true;
         }
         else
@@ -152,6 +151,7 @@ public class LetterBoxLAN : NetworkBehaviour
     {
         if (isServer)
         {
+            Debug.LogError("Server");
             return;
         }
         ChangeBox(NumberOfLetters);

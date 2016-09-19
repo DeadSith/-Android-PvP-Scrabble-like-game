@@ -1,6 +1,6 @@
-﻿#if DEBUG
+﻿/*#if DEBUG
 #undef DEBUG
-#endif
+#endif*/
 
 //Uncomment upper lines for build
 using UnityEngine;
@@ -11,6 +11,7 @@ public class PinchZoom : MonoBehaviour
     public int MaxSize = 200;
     public float ZoomSpeed = 15;
     public float MoveSpeed = 0.5f;
+    public Vector3 LastPoss = Vector3.zero;
 
     private void Update()
     {

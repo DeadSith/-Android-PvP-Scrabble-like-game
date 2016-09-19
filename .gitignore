@@ -5,6 +5,7 @@
 [Oo]bj/
 [Bb]uild/
 [Ll]ibrary/
+game_Data/
 Scrabble_64_Data/
 scrabble_Data/
 *.pdb

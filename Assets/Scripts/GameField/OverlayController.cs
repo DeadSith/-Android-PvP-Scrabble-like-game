@@ -47,6 +47,13 @@ public class OverlayController : MonoBehaviour
         buttonGrid.AddElement(0, 2, NextTurnButton.gameObject, .05f);
         buttonGrid.AddElement(0, 3, ChangeLetterButton.gameObject, .05f);
         buttonGrid.AddElement(0, 4, CenterButton.gameObject, .05f);
+        if (GameObject.FindGameObjectWithTag("Manager") != null)
+        {
+            SkipTurnButton.interactable=false;
+            NextTurnButton.interactable = false;
+            ChangeLetterButton.interactable = false;
+            RemoveAllButton.interactable = false;
+        }
         infoGrid.AddElement(0, 0, Player1Info);
         infoGrid.AddElement(0, 4, Player2Info);
         if (PlayerPrefs.GetInt("TimerEnabled", 0) == 1)

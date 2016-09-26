@@ -188,8 +188,15 @@ public class UIController : MonoBehaviour
     public void ChangePlayerName(int playerNumber, string name)
     {
         if (playerNumber == 1)
-            Player1Text.text = name;
-        else Player2Text.text = name;
+        {
+            _player1Name = name;
+            Player1Text.text = String.Format("{0}\tБали: 0", _player1Name);
+        }
+        else
+        {
+            _player2Name = name;
+            Player2Text.text = String.Format("{0}\tБали: 0", _player2Name);
+        } 
     }
     #endregion Multiplayer only
 

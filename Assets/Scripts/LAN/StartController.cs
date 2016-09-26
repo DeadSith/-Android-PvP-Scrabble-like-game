@@ -11,6 +11,11 @@ public class StartController : MonoBehaviour
     public NetworkManager Manager;
     public GameObject SettingsCanvas;
 
+    public GameObject StartCanvas;
+    public GameObject StartServerButton;
+    public GameObject StartClientButton;
+    public GameObject ExitButton;
+
     public void StartClient()
     {
         Manager.StartClient();
@@ -37,6 +42,12 @@ public class StartController : MonoBehaviour
     //Finds crrent manager, writes current ip adress to InputField
     private void Awake()
     {
+        var grid = StartCanvas.GetComponent<UIGrid>();
+        grid.Initialize();
+        grid.AddElement(2,1,ExitButton);
+        grid.AddElement(3,1,StartClientButton);
+        grid.AddElement(4,1,StartServerButton);
+        grid.AddElement(5,1,AdressText.gameObject);
         Manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<NetworkManager>();
         Manager.networkPort = 7777;
         AdressText.text = Network.player.ipAddress;
